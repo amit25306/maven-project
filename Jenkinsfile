@@ -10,6 +10,7 @@ stages{
 		steps{
 		withMaven(jdk: 'Default_JDK', maven: 'Default Maven') {
 			sh 'mvn compile'
+			sh 'mvn test'
 		}
 		}
 	}
