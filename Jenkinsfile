@@ -41,5 +41,10 @@ stages{
 		}
 		}
 	}
+	stage('Deploy Artifacts'){
+        	sshagent(['tomcat-pipe']) {
+        	sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@172.31.16.37:/usr/share/tomcat/webapps/'
+        	}
+    	}
 }
 }	
