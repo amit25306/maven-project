@@ -27,5 +27,19 @@ stages{
 		}
 		}
 	}
+	stage('Verify with Maven'){
+		steps{
+		withMaven(jdk: 'Default_JDK', maven: 'Default Maven') {
+			sh 'mvn verify'
+		}
+		}
+	}
+	stage('install with Maven'){
+		steps{
+		withMaven(jdk: 'Default_JDK', maven: 'Default Maven') {
+			sh 'mvn clean install'
+		}
+		}
+	}
 }
 }	
