@@ -16,7 +16,14 @@ stages{
 	stage('Test with Maven'){
 		steps{
 		withMaven(jdk: 'Default_JDK', maven: 'Default Maven') {
-			sh 'mvn package'
+			sh 'mvn test'
+		}
+		}
+	}
+	stage('Build with Maven'){
+		steps{
+		withMaven(jdk: 'Default_JDK', maven: 'Default Maven') {
+			sh 'mvn clean package'
 		}
 		}
 	}
