@@ -1,10 +1,17 @@
 pipeline {
 agent any 
 stages{
-stage('git clone'){
-	steps {
-	git 'https://github.com/amit25306/maven-project'
+	stage('SCM Checkout'){
+		steps {
+		git 'https://github.com/amit25306/maven-project'
+		}
 	}
-}
+	stage('Compile with Maven'){
+		steps{
+		withMaven(jdk: 'Default_JDK', maven: 'Default Maven') {
+			sh 'mvn compile'
+		}
+		}
+	}
 }
 }	
