@@ -3,7 +3,7 @@ agent any
 stages{
 	stage('SCM Checkout'){
 		steps {
-		git 'https://github.com/amit25306/maven-project'
+		git branch: 'master', url: 'https://github.com/amit25306/maven-project'
 		}
 	}
 	stage('Compile with Maven'){
