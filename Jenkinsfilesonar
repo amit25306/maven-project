@@ -10,7 +10,7 @@ pipeline {
 				steps{
 					withSonarQubeEnv('sonar') {
 						withMaven(jdk: 'Default_JDK', maven: 'Default Maven') {
-							sh 'clean mvn install sonar:sonar'
+							sh 'mvn install sonar:sonar'
 						}
 					}
 				}
