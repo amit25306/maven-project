@@ -1,0 +1,18 @@
+pipeline {
+	agent any
+		stages {
+			stage ('scm checkout'){
+				steps  {
+					git branch: 'master', url: 'https://github.com/amit25306/maven-project'
+				}
+			}
+			stage ('maven deploy'){
+				steps{
+					sshagent (['tomcat-pipe']) {
+						sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@172.31.26.93:/usr/share/tomcat/webapps/'
+					}
+				}
+			}
+		
+		}	
+}
