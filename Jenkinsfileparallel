@@ -21,14 +21,15 @@ agent any
             steps { withMaven(jdk: 'Default_JDK', maven: 'Default Maven') {
      					 	sh 'mvn install' } }
         }
-    } }
+    }, 
+	failfast: true
+	}
     stage ('maven deploy'){
 	steps{
 	sshagent (['tomcat-pipe']) {
 		sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@172.31.26.93:/usr/share/tomcat/webapps/'
 		}
 	}
-	}, 
-	failfast: true
+	}
 	}
 }
