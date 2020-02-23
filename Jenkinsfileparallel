@@ -17,13 +17,13 @@ agent any
     parallel {
         stage('maven package'){
             steps {
-	    sh 'mvn Package' }
+	    sh 'mvn anypackage' }
         }
     }
 	{
         stage('maven install'){
             steps { withMaven(jdk: 'Default_JDK', maven: 'Default Maven') {
-     	    sh 'mvn install' } }
+     	    sh 'mvn anyinstall' } }
         }
     }
 	failFast true
