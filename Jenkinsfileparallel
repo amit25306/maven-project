@@ -2,34 +2,37 @@ pipeline {
 agent any
 	stages {
 	stage ('parallel checkout') {
-    parallel checkoutmaster: {
+    parallel {
         stage('scm master checkout'){
 			steps { git url: 'https://github.com/amit25306/maven-project', branch: 'master' }
 	    }
-    }, checkoutfeature: {
+    }
+	{
         stage ('scm feature checkout'){
 			steps { git url: 'https://github.com/amit25306/maven-project', branch: 'ci-cd-pipeline' }
 	    }
     } }
+	
 	stage ('parallel package') {
-    parallel createpackage: {
+    parallel {
         stage('maven package'){
             steps { sh 'mvn package' }
         }
-    }, installm2mvnrepo: {
+    }
+	{
         stage('maven install'){
             steps { withMaven(jdk: 'Default_JDK', maven: 'Default Maven') {
      					 	sh 'mvn install' } }
         }
-    }
-	}, 
+    }, 
 	failfast: true
+	}
     stage ('maven deploy'){
-	steps{
-	sshagent (['tomcat-pipe']) {
-		sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@172.31.26.93:/usr/share/tomcat/webapps/'
-		}
-	}
-	}
+				steps{
+					sshagent (['tomcat-pipe']) {
+						sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@172.31.26.93:/usr/share/tomcat/webapps/'
+					}
+				}
+			}
 	}
 }
