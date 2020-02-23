@@ -26,7 +26,7 @@ agent any
      	    sh 'mvn install' } }
         }
     }
-	failfast true
+	failFast true
 	}
     stage ('maven deploy'){
 	steps{
