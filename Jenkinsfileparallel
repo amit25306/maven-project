@@ -21,9 +21,9 @@ agent any
             steps { withMaven(jdk: 'Default_JDK', maven: 'Default Maven') {
      					 	sh 'mvn install' } }
         }
-    }, 
+    }
+	}, 
 	failfast: true
-	}
     stage ('maven deploy'){
 	steps{
 	sshagent (['tomcat-pipe']) {
