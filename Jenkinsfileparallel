@@ -28,7 +28,6 @@ agent any
 						sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@172.31.26.93:/usr/share/tomcat/webapps/'
 					}
 				}
-			},
-    failFast: true
+			}
 	}
 }
