@@ -1,0 +1,24 @@
+pipeline {
+agent any
+	stages {
+    parallel checkoutmaster: {
+        stage('scm master checkout'){
+			steps { git url: 'https://github.com/amit25306/maven-project', branch: 'master' }
+	    }
+    }, checkoutfeature: {
+        stage ('scm feature checkout'){
+			steps { git url: 'https://github.com/amit25306/maven-project', branch: 'ci-cd-pipeline' }
+	    }
+    }
+    parallel createpackage: {
+        stage('maven package'){
+            steps { sh 'mvn package' }
+        }
+    }, installm2mvnrepo: {
+        stage('maven install'){
+            steps { sh 'mvn install' }
+        }
+    },
+    failFast: true
+	}
+}
