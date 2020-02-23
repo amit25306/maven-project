@@ -8,7 +8,7 @@ pipeline {
 			}
 			stage ('maven deploy'){
 				steps{
-					withMaven(jdk: 'LocalJDK', maven: 'LocalMVN') {
+					withMaven(jdk: 'Default_JDK', maven: 'Default Maven') {
      					 	sh ' mvn install '
    					}
 					sshagent (['tomcat-pipe']) {
