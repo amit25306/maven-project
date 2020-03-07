@@ -16,8 +16,8 @@ agent any
 	stage ('parallel package') {
     parallel {
         stage('maven package'){
-            steps {
-	    sh 'mvn package' }
+            steps { withMaven(jdk: 'Default_JDK', maven: 'Default Maven') {
+     	    sh 'mvn package' } }
         }
     }
 	{
