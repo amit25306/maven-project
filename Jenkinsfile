@@ -15,7 +15,7 @@ git branch: 'ci-cd-with-docker' , url: 'https://github.com/amit25306/maven-proje
 stage ("package")
 {
     steps {
-        withMaven(jdk: 'localjdk-8', maven: 'localmaven') {
+        withMaven(jdk: 'Default_JDK', maven: 'Default Maven') {
     sh 'mvn package'
 }
     }
