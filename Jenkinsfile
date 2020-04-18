@@ -30,16 +30,17 @@ sh 'docker build -t amit253/mytomcat:0.0.1 .'
 }
 
 stage ("docker image push")
+{       
+steps{
 
-{
-steps {
-    sh "docker login -u amit253 -p ${myDocker}"
+withCredentials([string(credentialsId: 'MyDocker', variable: 'MyDocker')]) 
+ 
+  {
+    sh "docker login -u amit253 -p ${MyDocker}"
     sh 'docker push amit253/mytomcat:0.0.1'
     sh 'docker rmi amit253/mytomcat:0.0.1'
-
-}
-
 }
 }
-
+}
+}
 }
